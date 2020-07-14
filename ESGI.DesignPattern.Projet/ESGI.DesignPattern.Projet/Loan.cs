@@ -13,8 +13,8 @@ namespace ESGI.DesignPattern.Projet
         public IList<Payment> _payments = new List<Payment>();
         public readonly DateTime? _today = DateTime.Now;
         public readonly DateTime _start;
-        private long MILLIS_PER_DAY = 86400000;
-        private long DAYS_PER_YEAR = 365;
+        //private const long MILLIS_PER_DAY = 86400000;
+        //private const long DAYS_PER_YEAR = 365;
         public readonly double _riskRating;
         public readonly double _unusedPercentage;
         private readonly CapitalStrategy _capitalStrategy;
