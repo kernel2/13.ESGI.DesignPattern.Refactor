@@ -1,20 +1,7 @@
 ﻿namespace ESGI.DesignPattern.Projet
 {
-    public class UnusedRiskFactors
+    public static class UnusedRiskFactors
     {
-        private UnusedRiskFactors()
-        {
-
-        }
-
-        public static UnusedRiskFactors GetFactors()
-        {
-            return new UnusedRiskFactors();
-        }
-
-        public double ForRating(double riskRating)
-        {
-            return 0.01;
-        }
+        public const double unusedRiskRating = 0.01;
     }
 }
