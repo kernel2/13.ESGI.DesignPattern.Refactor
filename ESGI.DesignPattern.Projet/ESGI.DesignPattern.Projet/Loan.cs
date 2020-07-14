@@ -18,13 +18,14 @@ namespace ESGI.DesignPattern.Projet
         private double _unusedPercentage;
         private CapitalStrategy _capitalStrategy;
 
-        public Loan(double commitment,
+        internal Loan(double commitment,
                     double notSureWhatThisIs,
                     DateTime start,
                     DateTime? expiry,
                     DateTime? maturity,
                     int riskRating,
-                    CapitalStrategy capitalStrategy)
+                    CapitalStrategy capitalStrategy,
+                    double unusedPercentage)
         {
             this._expiry = expiry;
             this._commitment = commitment;
@@ -34,6 +35,7 @@ namespace ESGI.DesignPattern.Projet
             this._riskRating = riskRating;
             this._unusedPercentage = 1.0;
             this._capitalStrategy = capitalStrategy;
+            this._unusedPercentage = unusedPercentage;
         }
 
         public DateTime? GetExpiry()

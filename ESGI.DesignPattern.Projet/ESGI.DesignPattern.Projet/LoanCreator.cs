@@ -7,24 +7,42 @@ namespace ESGI.DesignPattern.Projet
     {
         public static Loan NewTermLoan(double commitment, DateTime start, DateTime maturity, int riskRating)
         {
-            return new Loan(commitment, commitment, start, null,
-                            maturity, riskRating, new CapitalStrategyTermLoan());
+            return new LoanBuilder()
+                .WithCommitment(commitment)                
+                .WithStartDate(start)
+                .WithExpiryDate(null)
+                .WithMaturityDate(maturity)
+                .WithRiskRating(riskRating)
+                .WithStrategy(new CapitalStrategyTermLoan())
+                .Build();
         }
 
 
         public static Loan NewRevolver(double commitment, DateTime start, DateTime expiry, int riskRating)
         {
-            return new Loan(commitment, 0, start, expiry,
-                            null, riskRating, new CapitalStrategyRevolver());
+            return new LoanBuilder()
+                .WithCommitment(commitment)
+                .WithStartDate(start)
+                .WithExpiryDate(expiry)
+                .WithMaturityDate(null)
+                .WithRiskRating(riskRating)
+                .WithStrategy(new CapitalStrategyRevolver())
+                .Build();
         }
 
         public static Loan NewAdvisedLine(double commitment, DateTime start, DateTime expiry, int riskRating)
         {
             if (riskRating > 3) return null;
-            Loan advisedLine = new Loan(commitment, 0, start, expiry,
-                                        null, riskRating, new CapitalStrategyAdvisedLine());
-            advisedLine.SetUnusedPercentage(0.1);
-            return advisedLine;
+            return new LoanBuilder()
+                .WithCommitment(commitment)
+                .WithNotSureWhatThisIs(0)
+                .WithStartDate(start)
+                .WithExpiryDate(expiry)
+                .WithMaturityDate(null)
+                .WithRiskRating(riskRating)
+                .WithStrategy(new CapitalStrategyAdvisedLine())
+                .WithUnusedPercentage(0.1)
+                .Build();
         }
     }
 }
