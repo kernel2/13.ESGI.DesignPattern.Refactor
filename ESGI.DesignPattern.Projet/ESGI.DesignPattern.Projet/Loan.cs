@@ -5,18 +5,19 @@ namespace ESGI.DesignPattern.Projet
 {
     public class Loan
     {
-        double _commitment = 1.0;
-        private DateTime? _expiry;
-        private DateTime? _maturity;
-        private double _outstanding;
-        IList<Payment> _payments = new List<Payment>();
-        private DateTime? _today = DateTime.Now;
-        private DateTime _start;
+        
+        public readonly DateTime? _expiry;
+        public readonly DateTime? _maturity;
+        public double _commitment { get; }
+        public double _outstanding { get; }
+        public IList<Payment> _payments = new List<Payment>();
+        public readonly DateTime? _today = DateTime.Now;
+        public readonly DateTime _start;
         private long MILLIS_PER_DAY = 86400000;
         private long DAYS_PER_YEAR = 365;
-        private double _riskRating;
-        private double _unusedPercentage;
-        private CapitalStrategy _capitalStrategy;
+        public readonly double _riskRating;
+        public readonly double _unusedPercentage;
+        private readonly CapitalStrategy _capitalStrategy;
 
         internal Loan(double commitment,
                     double notSureWhatThisIs,
@@ -25,7 +26,8 @@ namespace ESGI.DesignPattern.Projet
                     DateTime? maturity,
                     int riskRating,
                     CapitalStrategy capitalStrategy,
-                    double unusedPercentage)
+                    double unusedPercentage,
+                    double outstanding)
         {
             this._expiry = expiry;
             this._commitment = commitment;
@@ -36,26 +38,7 @@ namespace ESGI.DesignPattern.Projet
             this._unusedPercentage = 1.0;
             this._capitalStrategy = capitalStrategy;
             this._unusedPercentage = unusedPercentage;
-        }
-
-        public DateTime? GetExpiry()
-        {
-            return _expiry;
-        }
-
-        public double GetCommitment()
-        {
-            return _commitment;
-        }
-
-        public DateTime? GetMaturity()
-        {
-            return _maturity;
-        }
-
-        public double GetRiskRating()
-        {
-            return _riskRating;
+            this._outstanding = outstanding;
         }
 
         public void Payment(double amount, DateTime paymentDate)
@@ -68,30 +51,7 @@ namespace ESGI.DesignPattern.Projet
             return _capitalStrategy.Capital(this);
         }
 
-        public DateTime? GetToday()
-        {
-            return _today;
-        }
-
-        public DateTime? GetStart()
-        {
-            return _start;
-        }
-
-        public IList<Payment> Payments()
-        {
-            return _payments;
-        }
-
-        public double GetUnusedPercentage()
-        {
-            return _unusedPercentage;
-        }
-
-        public void SetUnusedPercentage(double unusedPercentage)
-        {
-            _unusedPercentage = unusedPercentage;
-        }
+       
 
         public double UnusedRiskAmount()
         {

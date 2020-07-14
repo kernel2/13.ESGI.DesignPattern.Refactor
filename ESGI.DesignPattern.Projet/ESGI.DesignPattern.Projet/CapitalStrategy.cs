@@ -11,22 +11,22 @@ namespace ESGI.DesignPattern.Projet
 
         protected double RiskFactorFor(Loan loan)
         {
-            return RiskFactor.GetFactors().ForRating(loan.GetRiskRating());
+            return RiskFactor.GetFactors().ForRating(loan._riskRating);
         }
 
         private double UnusedRiskFactorFor(Loan loan)
         {
-            return UnusedRiskFactors.GetFactors().ForRating(loan.GetRiskRating());
+            return UnusedRiskFactors.GetFactors().ForRating(loan._riskRating);
         }
 
         public virtual double Duration(Loan loan)
         {
-            return YearsTo(loan.GetExpiry(), loan);
+            return YearsTo(loan._expiry, loan);
         }
 
         protected double YearsTo(DateTime? endDate, Loan loan)
         {
-            DateTime? beginDate = (loan.GetToday() == null ? loan.GetStart() : loan.GetToday());
+            DateTime? beginDate = (loan._today.HasValue? loan._today : loan._start);
             return (double)((endDate?.Ticks - beginDate?.Ticks) / MILLIS_PER_DAY / DAYS_PER_YEAR);
         }
     }
