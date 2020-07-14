@@ -8,9 +8,5 @@
                         + (loan.UnusedRiskAmount() * Duration(loan) * UnusedRiskFactorFor());
         }
 
-        private double UnusedRiskFactorFor()
-        {
-            return UnusedRiskFactors.unusedRiskRating;
-        }
     }
 }
