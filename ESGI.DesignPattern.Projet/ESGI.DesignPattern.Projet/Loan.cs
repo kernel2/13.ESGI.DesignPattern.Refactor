@@ -10,7 +10,7 @@ namespace ESGI.DesignPattern.Projet
         public readonly DateTime? _maturity;
         public double _commitment { get; }
         public double _outstanding { get; }
-        public IList<Payment> _payments = new List<Payment>();
+        public IList<Payment> _payments { get; } = new List<Payment>();
         public readonly DateTime? _today = DateTime.Now;
         public readonly DateTime _start;
         public readonly double _riskRating;
@@ -42,23 +42,12 @@ namespace ESGI.DesignPattern.Projet
         public void Payment(double amount, DateTime paymentDate)
         {
             _payments.Add(new Payment(amount, paymentDate));
-        }
-
-        public double Capital()
-        {
-            return _capitalStrategy.Capital(this);
-        }
-
-       
+        }       
 
         public double UnusedRiskAmount()
         {
             return (_commitment - _outstanding);
         }
 
-        public double OutstandingRiskAmount()
-        {
-            return _outstanding;
-        }
     }
 }
